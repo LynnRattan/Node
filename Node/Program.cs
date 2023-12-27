@@ -52,20 +52,33 @@
         //object
         //Equals
 
-        //אורך הקלט n:
-        //המקרה הגרוע:
-        //הפעולה מתבצעת.... ובכל סיבוב הלולאה מתבצעות.... מכאן שסיבוכיות הפעולה: 
+        //אורך הקלט n: מספר החוליות
+        //המקרה הגרוע:x לא קיים בשרשרת החוליות
+        // הפעולה מתבצעת n פעמים
+        //ובכל סיבוב הלולאה מתבצעות פעולות קבועות מכאן שסיבוכיות הפעולה:O(n) 
         public static bool IsExists<T>(Node<T> lst, T x)
         {
-            throw new NotImplementedException("TO DO");
+            while (lst != null)
+            {
+                if ((lst.GetValue()).Equals(x))
+                    return true;
+                lst = lst.GetNext();
+            }
+            return false;
         }
-        //אורך הקלט n:
-        //המקרה הגרוע:
-        //הפעולה מבצעת ....  קריאות ובכל קריאה הלולאה מתבצעות.... מכאן שסיבוכיות הפעולה: 
+        //אורך הקלט n:מספר החוליות
+        //המקרה הגרוע:x לא קיים בשרשרת החוליות
+        //הפעולה מבצעת n  קריאות
+        //ובכל קריאה הלולאה מתבצעות פעולות קבועות מכאן שסיבוכיות הפעולה:O(n)
 
         public static bool IsExistsRecursive<T>(Node<T> lst, T x)
         {
-            throw new NotImplementedException("TO DO");
+            if(lst == null)
+                return false;
+            if ((lst.GetValue()).Equals(x))
+                return true;
+           return IsExistsRecursive(lst.GetNext(), x);
+           
         }
 
 

@@ -81,6 +81,28 @@
            
         }
 
+        public static void AddToEnd<T>(Node<T> newNode, Node<T> lst)
+        {
+            while(lst.HasNext())
+            {
+                lst = lst.GetNext();
+            }
+
+            lst.SetNext(newNode);
+
+        }
+
+        public void AddToMidEnd(Node<int> newNode, Node<int> lst)
+        {
+            while (lst.HasNext() && newNode.GetValue() > (lst.GetNext()).GetValue())
+            {
+                lst = lst.GetNext();
+            }
+             newNode.SetNext(lst.GetNext());
+             lst.SetNext(newNode);
+
+        }
+
 
         static void Main(string[] args)
         {

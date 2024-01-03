@@ -1,9 +1,11 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics.Metrics;
+using System.Runtime.InteropServices;
 
 namespace Node
 {
     internal class Program
     {
+        //תרגיל 8
         //פעולה המקבלת מצביע לחוליה 
         //מחזירה אמת אם החוליות מסודרות בסדר עולה
         //ושקר אחרת
@@ -145,6 +147,84 @@ namespace Node
             return head;
         }
 
+        //תרגיל 2
+        public static int HowMany(Node<int> lst,int num)
+        {
+            int counter = 0;
+            while(lst.HasNext())
+            {
+                if (IsExists<int>(lst, num))
+                    counter++;
+                lst = lst.GetNext();
+            }
+            return counter;
+        }
+
+        //תרגיך 4
+        public static char MoreEvenOrOdd(Node<int> lst)
+        {
+            int z = 0;
+            int e = 0;
+            while(lst.HasNext())
+            {
+                if (lst.GetValue() % 2 == 0)
+                    z++;
+                else
+                    e++;
+            }
+            if (z > e)
+                return 'z';
+            else if (e > z)
+                return 'e';
+            else return 's';
+                
+        }
+
+        //תרגיל 6
+        public static Node<int> OnlyOnce(Node <int> lst)
+        {
+            Node<int> newHead = lst;
+            return null;
+        }
+
+        //תרגיל 10
+        public static Node<int> Sidra(int begginer, int num)
+        {
+            Node<int> lst = new Node<int>(begginer);
+            Node<int> head = lst;
+            for(int i = 0; i < num-1; i++)
+            {
+                begginer++;
+                Node<int> next = new Node<int>(begginer);
+                lst.SetNext(next);
+                lst = lst.GetNext();
+            }
+            return head;
+        }
+
+        //תרגיל 12
+        public static bool Balanced(Node<int> lst)
+        {
+            int counter=0;
+            int sum = 0;
+            double avg;
+            int bigger = 0;
+            int smaller = 0;
+            while(lst.HasNext())
+            {
+                sum += lst.GetValue();
+                counter++;
+            }
+            avg = (double)(sum / counter);
+
+            for(int i=0; i < counter; i++)
+            {
+               
+            }
+            return null;
+        }
+
+
         static void Main(string[] args)
         {
             //Node<int> lst1 = new Node<int>(4, new Node<int>(5, new Node<int>(6, new Node<int>(7))));//[4, next]=>[5, next]=>[6, next]=>[7, next]=>null
@@ -166,7 +246,7 @@ namespace Node
             //Console.WriteLine(IsExistsRecursive(lst4, 'i'));//should print True
             //Console.WriteLine(IsExistsRecursive(lst4, 'I'));//should print False
 
-            
+            Console.WriteLine(Sidra(5,4));
         }
     
 

@@ -154,21 +154,19 @@ namespace Node
         {
             Node<int> head = lst;
             int counter = 0;
-            while(lst.HasNext())
+            int valueBefore = lst.GetValue();
+            int value = 0;
+            if (valueBefore == num)
             {
-                if (IsExists<int>(lst, num))
-                {
-                    while(lst.GetNext().GetValue()==num)
-                    {
-                        if(!(lst.GetNext().HasNext()))
-                        {
-                            counter=1;
-                        }
-                        lst=lst.GetNext();
-                    }
-                    counter++;
-                }
+                counter++;
+            }
+            while (lst.HasNext())
+            {
                 lst = lst.GetNext();
+                value = lst.GetValue();
+                if(value == num && valueBefore != value)
+                    counter++;
+                valueBefore = value;
             }
             return counter;
         }
@@ -180,18 +178,25 @@ namespace Node
         {
             int z = 0;
             int e = 0;
-            while(lst.HasNext())
+            if ((lst.GetValue()) % 2 == 0)
+                z++;
+            else
+                e++;
+            while (lst!=null && lst.HasNext())
             {
-                if (lst.GetValue() % 2 == 0)
+                lst = lst.GetNext();
+                if ((lst.GetValue()) % 2 == 0)
                     z++;
                 else
                     e++;
             }
             if (z > e)
                 return 'z';
+      
             else if (e > z)
                 return 'e';
-            else return 's';
+            
+            return 's';
                 
         }
 

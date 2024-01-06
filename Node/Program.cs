@@ -148,19 +148,33 @@ namespace Node
         }
 
         //תרגיל 2
+        //אורך הקלט n:כמות החוליות
+        //סיבוכיות:O(n)
         public static int HowMany(Node<int> lst,int num)
         {
             int counter = 0;
             while(lst.HasNext())
             {
                 if (IsExists<int>(lst, num))
+                {
+                    while(lst.GetNext().GetValue()==num)
+                    {
+                        if(!(lst.GetNext().HasNext()))
+                        {
+                            counter=1;
+                        }
+                        lst=lst.GetNext();
+                    }
                     counter++;
+                }
                 lst = lst.GetNext();
             }
             return counter;
         }
 
-        //תרגיך 4
+        //תרגיל 4
+        //אורך הקלט n:כמות החוליות
+        //סיבוכיות:O(n)
         public static char MoreEvenOrOdd(Node<int> lst)
         {
             int z = 0;
@@ -181,6 +195,7 @@ namespace Node
         }
 
         //תרגיל 6
+        //
         public static Node<int> OnlyOnce(Node <int> lst)
         {
             Node<int> newHead = lst;
@@ -188,6 +203,8 @@ namespace Node
         }
 
         //תרגיל 10
+        //אורך הקלט n: num
+        //סיבוכיות:O(n)
         public static Node<int> Sidra(int begginer, int num)
         {
             Node<int> lst = new Node<int>(begginer);
@@ -203,6 +220,7 @@ namespace Node
         }
 
         //תרגיל 12
+        //אורך הקלט n: כמות החוליות
         public static bool Balanced(Node<int> lst)
         {
             int counter=0;
@@ -222,6 +240,18 @@ namespace Node
                
             }
             return null;
+        }
+
+        public static int GetMax()
+        {
+            
+        }
+        //תרגיל 14
+        //אורך הקלט n: 
+        //סיבוכיות:O()
+        public static Node<int> RemoveNBig(Node<int> lst, int n)
+        {
+          Node  
         }
 
 

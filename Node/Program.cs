@@ -152,6 +152,7 @@ namespace Node
         //סיבוכיות:O(n)
         public static int HowMany(Node<int> lst,int num)
         {
+            Node<int> head = lst;
             int counter = 0;
             while(lst.HasNext())
             {
@@ -195,11 +196,19 @@ namespace Node
         }
 
         //תרגיל 6
-        //
+        //אורך הקלט n: כמות החוליות
+        //סיבוכיות:O(n)
         public static Node<int> OnlyOnce(Node <int> lst)
         {
-            Node<int> newHead = lst;
-            return null;
+            Node<int> head = lst;
+            while(lst.HasNext() && lst.GetNext().GetValue()==lst.GetValue())
+            {
+                    lst.SetNext(lst.GetNext().GetNext());
+                    next.SetNext(null);
+                    lst=lst.GetNext();
+            }
+                
+            return head;
         }
 
         //תרגיל 10
@@ -214,44 +223,89 @@ namespace Node
                 begginer++;
                 Node<int> next = new Node<int>(begginer);
                 lst.SetNext(next);
-                lst = lst.GetNext();
+                lst = next;
             }
             return head;
         }
 
         //תרגיל 12
         //אורך הקלט n: כמות החוליות
+        //סיבוכיות:O(n)
         public static bool Balanced(Node<int> lst)
         {
-            int counter=0;
+            Node<int> head = lst;
+            int counter = 0;
             int sum = 0;
             double avg;
             int bigger = 0;
             int smaller = 0;
-            while(lst.HasNext())
+            while (lst.HasNext())
             {
                 sum += lst.GetValue();
                 counter++;
+                lst= lst.GetNext();
             }
+            lst = head;
             avg = (double)(sum / counter);
 
-            for(int i=0; i < counter; i++)
+            for (int i = 0; i < counter; i++)
             {
-               
+                if(lst.GetValue()<avg)
+                    smaller++;
+                if(lst.GetValue()>avg)
+                    bigger++;
             }
-            return null;
+            if(smaller == bigger)
+            return true;
+            else return false;
         }
 
-        public static int GetMax()
+        public static Node<int> GetMax(Node<int> lst) //פעולה המחזירה את החוליה בעלת הערך הגדול ביותר (אם יש כמה אז מחזירה את הראשונה)
         {
+            Node<int> head = lst;
+            int max = lst.GetValue();
+            Node<int> maxNode= lst;
+            while (lst != null && lst.HasNext())
+            {
+                if (lst.GetValue() > max)
+                {
+                    max = lst.GetValue();
+                    maxNode = lst;
+                }
+                lst = lst.GetNext();
+            }
+            return maxNode;
             
         }
         //תרגיל 14
         //אורך הקלט n: 
-        //סיבוכיות:O()
+        //סיבוכיות:O(n^2)
         public static Node<int> RemoveNBig(Node<int> lst, int n)
         {
-          Node  
+          Node<int> head = lst;
+          Node<int> next = lst.GetNext();
+          Node<int> maxNode;
+            int max=0;
+            for(int i=0; i<n; i++)
+            {
+                maxNode = GetMax(lst);
+                if(lst.Equals(maxNode))
+                {
+                    lst = next;
+                    lst.SetNext(null);
+                    head=lst;
+                }
+                else
+                {
+                    while(!(next.Equals(maxNode)))
+                          {
+                              lst=next;
+                          }
+                    lst.SetNext(next.GetNext());
+                    next.SetNext(null);
+                }       
+            }
+              return head;
         }
 
 

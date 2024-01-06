@@ -204,7 +204,7 @@ namespace Node
             while(lst.HasNext() && lst.GetNext().GetValue()==lst.GetValue())
             {
                     lst.SetNext(lst.GetNext().GetNext());
-                    next.SetNext(null);
+                    lst.GetNext().SetNext(null);
                     lst=lst.GetNext();
             }
                 

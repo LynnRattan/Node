@@ -313,14 +313,116 @@ namespace Node
               return head;
         }
 
+        public static int BiggerBigNum(Node<int> lis1, Node<int> lis2)
+        { 
+            Node<int> head1 = lis1;
+            Node<int> head2 = lis2;
+            int bigger = 0;
+
+            if (lis1.Equals(lis2))
+                return 0;
+
+            while(lis1!=null)
+            {
+                if(lis2!=null)
+                {
+                   
+                    if (lis1.GetValue() > lis2.GetValue())
+                        bigger= 1;
+                    if(lis1.GetValue() < lis2.GetValue())
+                       bigger= 2;
+                    lis1 = lis1.GetNext();
+                    lis2 = lis2.GetNext();
+                }
+                else bigger=1; 
+            }
+
+            lis1 = head1;
+            lis2 = head2;
+
+            while (lis2 != null)
+            {
+                if (lis1 != null)
+                {
+                    if (lis1.GetValue() > lis2.GetValue())
+                        bigger = 1;
+                    if (lis1.GetValue() < lis2.GetValue())
+                        bigger= 2;
+                    lis2 = lis2.GetNext();
+                    lis1=lis1.GetNext();
+                }
+                else bigger = 2;
+            }
+
+            
+            return bigger;
+        }
+
+        public static Node<T> Delete<T>(Node<T> lst, Node<T> lst2)
+        {
+
+            Node<T> head = lst; //שומר על הראש
+            if (head.Equals(lst2))
+            {
+                head = lst.GetNext();
+                lst.SetNext(null);
+
+            }
+
+
+            Node<T> next = lst.GetNext();
+
+            while (lst.HasNext() && !next.Equals(lst2))
+            {
+
+                lst = next;
+                next = lst.GetNext();
+
+            }
+
+            lst.SetNext(next.GetNext());
+            next.SetNext(null);
+            return head;
+           
+        }
+
+        public static Node<T> CancelLis2<T>(Node<T> lis1, Node<T> lis2)
+        {
+            Node<T> head1 = lis1;
+            Node<T> head2 = lis2;
+            //int counter2=0;
+
+            //while(lis2!=null)
+            //{
+            //    counter2++;
+            //    lis2 = lis2.GetNext();
+            //}
+
+            //lis2 = head2;
+
+            while(lis1!=null)
+            {
+               
+                   if(lis1.Equals(lis2))
+                {
+                    head1=Delete(head1, lis1);
+                    lis2 = lis2.GetNext();
+                }
+
+                lis1 = lis1.GetNext();
+
+            }
+
+            return head1;
+        }
 
         static void Main(string[] args)
         {
-            //Node<int> lst1 = new Node<int>(4, new Node<int>(5, new Node<int>(6, new Node<int>(7))));//[4, next]=>[5, next]=>[6, next]=>[7, next]=>null
+            Node<int> lst1 = new Node<int>(4, new Node<int>(5, new Node<int>(6, new Node<int>(2))));//[4, next]=>[5, next]=>[6, next]=>[7, next]=>null
 
             //Console.WriteLine(IsAscending(lst1));//should print True
             //Console.WriteLine(IsAscendingRecursive(lst1));//should print True
-            //Node<int> lst2 = new Node<int>(4, new Node<int>(5, new Node<int>(6, new Node<int>(2))));//[4, next]=>[5, next]=>[6, next]=>[2, next]=>null
+            Node<int> lst2 = new Node<int>(4, new Node<int>(5, new Node<int>(6, new Node<int>(7))));//[4, next]=>[5, next]=>[6, next]=>[2, next]=>null
             //Console.WriteLine(IsAscending(lst2));//should print False
             //Console.WriteLine(IsAscendingRecursive(lst2));//should print False
             //Node<int> lst3 = new Node<int>(4, new Node<int>(5, new Node<int>(4, new Node<int>(9))));//[4, next]=>[5, next]=>[4, next]=>[9, next]=>null
@@ -335,7 +437,10 @@ namespace Node
             //Console.WriteLine(IsExistsRecursive(lst4, 'i'));//should print True
             //Console.WriteLine(IsExistsRecursive(lst4, 'I'));//should print False
 
-            Console.WriteLine(Sidra(5,4));
+            //Console.WriteLine(Sidra(5,4));
+
+            Console.WriteLine(BiggerBigNum(lst1, lst2));
+            Console.WriteLine(CancelLis2(lst1, lst2));
         }
     
 
